@@ -6,8 +6,8 @@ export default function Home() {
     <>
       <header>
         <div >
-          <h3 className="name animated-text">KAVYA SHARMA </h3>
-          <h5 className="title animated-text">FULL STACK WEB DEVELOPER</h5>
+          <h3 className="name animated-text">KAVYA SHARMA  </h3>
+          <h5 className="title animated-text">\* FULL STACK WEB DEVELOPER *\</h5>
         </div>
 
        </header>
