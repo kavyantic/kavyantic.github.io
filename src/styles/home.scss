@@ -1,0 +1,64 @@
+.animated-text {
+  transition: all 0.3s ease;
+  --bg-size: 400%;
+
+  --color-one: rgb(207, 65, 65);
+  --color-two: rgb(210, 223, 111);
+  --color-three: rgb(57, 34, 87);
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-three),
+      var(--color-one)
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: move-bg 15s infinite linear;
+}
+
+@keyframes move-bg {
+  to {
+    background-position: var(--bg-size) 0;
+  }
+}
+
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+.name {
+  text-align: center;
+  padding: calc(0.5vw + 10px);
+  padding-bottom: 0;
+  position: relative;
+  display: inline-block;
+  font-weight: 600;
+  font-size: clamp(2rem, 25vmin, 5rem);
+
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  margin-bottom: 0;
+  line-height: 1;
+  //   font-family: 'Patrick Hand', cursive;
+}
+.name:hover {
+  transition: all 0.5s ease;
+  transform: scale(1.1);
+}
+
+.title {
+  // background-color: white;
+  font-size: clamp(1.5rem, 10vmin, 3rem);
+
+  text-align: center;
+  // color: rgb(249, 67, 67);
+}
