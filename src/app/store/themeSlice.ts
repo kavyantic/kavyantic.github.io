@@ -10,7 +10,7 @@
   }
 
   export const themeSlice = createSlice({
-    name: 'counter',
+    name: 'theme',
     initialState,
     reducers: {
       switchMode: (state) => {

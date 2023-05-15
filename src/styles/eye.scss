@@ -1,0 +1,57 @@
+.centerize {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+// 40% of eye-box it is contained in
+$eye-size: 40%;
+// % of its eye
+$sclera-size: 75%;
+$pupil-con-size: 70%;
+$pupil-size: 60%;
+
+.eye-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  & > .eye {
+    border-radius: 50% 15%;
+    background-color: theme("colors.secondry");
+    width: $eye-size;
+    height: $eye-size;
+    transform: rotate(45deg);
+    & > .sclera {
+      width: $sclera-size;
+      height: $sclera-size;
+      border-radius: 50% 10px;
+
+      background-color: theme("colors.primary");
+      & > .pupil-container {
+        width: $pupil-con-size;
+        height: $pupil-con-size;
+        // transition: all .1s ease-in-out;
+        &:hover {
+          .pupil {
+            width: 80%;
+            height: 80%;
+            transition: all 0.1s ease-in-out;
+          }
+        }
+
+        & > .pupil {
+          transition: all 0.2s ease-in-out;
+
+          width: $pupil-size;
+          height: $pupil-size;
+          border-radius: 100%;
+          background-color: theme("colors.secondry");
+        }
+      }
+    }
+  }
+  & > .lashes {
+  }
+}
