@@ -68,9 +68,17 @@
   width: calc(10vh + 35px + 10vw);
 }
 
+.profile-picture {
+  border-radius: 50% 0% 50% 50%;
+  height:45vh;
+  width:45vh; 
+}
+
 
 .landing {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  // align-items: center;
+  justify-content: space-between;
   height: 100vh;
 }

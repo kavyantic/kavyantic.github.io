@@ -255,7 +255,6 @@ import React, {
         className={"bg-secondry"}
         ref={navRef}
         onMouseDown={(e) => {
-          console.log("mouse down event");
   
           const { width, height, ...rects } =
             e.currentTarget.getBoundingClientRect();
@@ -266,7 +265,7 @@ import React, {
           e.stopPropagation();
           return;
         }}
-        onMouseUp={(e) => console.log("mouse up")}
+        // onMouseUp={(e) => console.log("mouse up")}
         // className={"navigator"}
         style={{
           position: "fixed",

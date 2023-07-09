@@ -26,6 +26,6 @@ export default function About({ phone, email }: PageProps) {
 export const getStaticProps: GetStaticProps<PageProps> =
   async function (context) {
     return {
-      props: { phone: "8949489335", email: "kavya@gmail.com" },
+      props: { phone: "8949689882", email: "kavyarahul9610@gmail.com",github:"https://github.com/sharmakavya281105/" },
     };
   };

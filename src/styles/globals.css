@@ -4,6 +4,12 @@
 
 
 
+
+
+
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
@@ -11,9 +17,9 @@
   --wheel-size: calc(var(--edge) / 4);
   --petal-size: calc(var(--edge) - var(--wheel-size)) --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+  /* --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace; */
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -42,6 +48,28 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+}
+@font-face {
+  font-family: 'Acorn';
+  src: local('Acorn Light'), local('Acorn-Light'),
+      url('acorn.woff') format('woff');
+    
+  /* font-weight: 300; */
+  font-style: normal;
+}
+
+.acorn {
+  font-family: "Acorn";
+
+  /* font-weight:300 ; */
+
+}
+
+.title {
+    letter-spacing: -1px;
+  line-height: 100%;
+  font-weight: lighter;
+  font-size: clamp(3.2rem, .5692rem + 8.238vw, 13.75rem)  ;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -103,14 +131,15 @@
 }
 
 * {
+  cursor: grab;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-body {
+/* body {
   font-family: 'Poppins', sans-serif, 'Roboto';
-}
+} */
 
 
 header {
@@ -171,4 +200,18 @@ a {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+
+
+
+/* Cursor styles */
+.cursor {
+  mix-blend-mode: var(--cursor-blend-mode);
+  background-color: var(--cursor-color);
+}
+
+.cursor-ring {
+  
+  border-color: var(--cursor-color);
 }

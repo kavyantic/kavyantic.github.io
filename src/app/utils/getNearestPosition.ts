@@ -19,11 +19,9 @@ const getNearestNavStack: (options: { left: number; top: number }) => {
     const midX = rects.width / 2;
     const midY = rects.height / 2;
     // return { left: midX, top: midY };
-    console.log(opt);
 
     if (opt.left > midX) {
       if (opt.top > midY) {
-        console.log("retsdfsf");
         return { ...NULL_REST, right: 10 };
       } else {
         return { ...NULL_REST, right: 10 };

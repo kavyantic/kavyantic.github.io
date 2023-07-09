@@ -1,16 +1,21 @@
 :root {
   --height: 10vh;
 }
+
 .navigator {
-  border-radius: 10vh;
-  // padding: 1em;
-  display: flex;
-  position: fixed;
-  margin: auto;
-  background-color: #454545;
-  bottom: 10vh;
-  transition: 0.2 ease-in-out;
+  max-width: 90vw;
+
 }
+// .navigator {
+//   border-radius: 10vh;
+//   // padding: 1em;
+//   display: flex;
+//   position: fixed;
+//   margin: auto;
+//   background-color: #454545;
+//   bottom: 10vh;
+//   transition: 0.2 ease-in-out;
+// }
 
 .navigator-toggle {
   background-color: #50483f;
@@ -23,7 +28,6 @@
   //   width: var(--height);
   transition: 0.2s ease;
 }
-
 
 .navigator-toggle-closed {
   transform: scale(1.5);

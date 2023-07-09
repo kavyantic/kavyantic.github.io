@@ -1,0 +1,79 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    --color-primary: 251 251 242;
+    --color-secondary: 255 233 214;
+    --color-accent: 255 127 17;
+    --color-text-primary: 203 228 222;
+    --color-text-secondary: 14 131 136;
+  }
+
+  body[data-theme="dark"] {
+    --color-secondary: 27 27 30;
+    --color-primary: 50 50 50;
+    --color-accent: 46 79 79;
+    --color-text-primary: 203 228 222;
+    --color-text-secondary: 14 131 136;
+  }
+
+  body[data-theme="dracula"] {
+    --color-primary: 44 51 51;
+    --color-secondary: 46 79 79;
+    --color-accent:85 110 83;
+    --color-text-primary: 203 228 222;
+    --color-text-secondary: 14 131 136;
+  }
+
+  body[data-theme="navy"] {
+    --color-secondary: 2 84 100;
+    --color-primary: 17 24 39;
+    --color-accent: 79 112 156;
+    --color-text-primary: 225 225 225;
+    --color-text-secondary: 225 225 225;
+  }
+}
+
+// For globals. If no attribute selector is specified then this will be applied
+body {
+  --eye-bg: rgb(var(--color-secondary));
+  --eye-sclera-bg: rgb(var(--color-primary));
+  --pupil-color: rgb(var(--color-secondary));
+  --eye-lash-color: var(--pupil-color);
+
+  // eye-sizes in order to center
+  // eye size relative to it's container
+  --sclera-size: 75%;
+  --pupil-con-size: 70%;
+  --pupil-size: 60%;
+  --lashes-container: 90%;
+
+  //cursor
+  --cursor-color: var(--eye-sclera-bg);
+  --cursor-blend-mode: color-dodge;
+}
+
+// since specification for "dark" is specified default body vars will be overridden
+*[data-theme="dark"] {
+  --eye-bg: white;
+  --eye-sclera-bg: white;
+  --pupil-color: rgb(var(--color-secondary));
+  --eye-bg: none;
+  --sclera-size: 90%;
+  --sclera-roundness: 50% 5px;
+  --eye-lash-color: var(--eye-sclera-bg);
+
+  --cursor-blend-mode: normal;
+}
+
+*[data-theme="navy"] {
+  --eye-bg: white;
+  --eye-sclera-bg: white;
+  --pupil-color: rgb(var(--color-primary));
+  --eye-bg: none;
+  --sclera-size: 90%;
+  --sclera-roundness: 50% 5px;
+  --eye-lash-color: var(--eye-sclera-bg);
+
+  --cursor-blend-mode: normal;
+}

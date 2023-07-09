@@ -1,57 +1,129 @@
-.centerize {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  justify-items: center;
+// 40% of eye-box it is contained in
+:root {
+  --eye-size: 50%;
 }
 
-// 40% of eye-box it is contained in
-$eye-size: 40%;
-// % of its eye
-$sclera-size: 75%;
-$pupil-con-size: 70%;
-$pupil-size: 60%;
-
 .eye-box {
+  --eye-roundness: 5% 50%;
+  --sclera-roundness: 10px 50%;
   width: 100%;
   height: 100%;
   position: relative;
   & > .eye {
-    border-radius: 50% 15%;
-    background-color: theme("colors.secondry");
-    width: $eye-size;
-    height: $eye-size;
-    transform: rotate(45deg);
+    transition: all 0.2s;
+    transform: rotate(-45deg);
+
+    border-radius: var(--eye-roundness);
+    width: var(--eye-size);
+    height: var(--eye-size);
+    background-color: var(--eye-bg);
     & > .sclera {
-      width: $sclera-size;
-      height: $sclera-size;
-      border-radius: 50% 10px;
-
-      background-color: theme("colors.primary");
+      width: var(--sclera-size);
+      height: var(--sclera-size);
+      border-radius: var(--sclera-roundness);
+      background-color: var(--eye-sclera-bg);
       & > .pupil-container {
-        width: $pupil-con-size;
-        height: $pupil-con-size;
+        // transform: rotate(-45deg);
+
+        width: var(--pupil-con-size);
+        height: var(--pupil-con-size);
         // transition: all .1s ease-in-out;
-        &:hover {
-          .pupil {
-            width: 80%;
-            height: 80%;
-            transition: all 0.1s ease-in-out;
+        & > .pupil-rotate {
+          width: 100%;
+          height: 100%;
+
+          &:hover {
+            .pupil {
+              width: 80%;
+              height: 80%;
+              transition: all 0.1s ease-in-out;
+            }
           }
-        }
 
-        & > .pupil {
-          transition: all 0.2s ease-in-out;
+          & > .pupil {
+            background-color: var(--pupil-color);
 
-          width: $pupil-size;
-          height: $pupil-size;
-          border-radius: 100%;
-          background-color: theme("colors.secondry");
+            transition: all 0.2s ease-in-out;
+
+            width: var(--pupil-size);
+            height: var(--pupil-size);
+            border-radius: 100%;
+          }
         }
       }
     }
   }
   & > .lashes {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    & > .lashes-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      & > .eye-lash {
+        width: 5%;
+        height: 90%;
+        & > div {
+          width: 100%;
+          height: 17%;
+          background-color: var(--eye-lash-color);
+        }
+      }
+    }
+    // width: $lashes-container;
+    // height:$lashes-container;
+  }
+}
+
+body[data-theme="dark"],
+body[data-theme="navy"] {
+  --sclera-roundness: 10px 5%;
+  .eye-box {
+    
+    & > .eye {
+      width: 50%;
+      height: 30%;
+      transform: rotate(0);
+
+      & > .sclera {
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+
+        & > .pupil-container {
+          transform: rotate(-45deg);
+
+          width: calc(3 / 5 * 70%);
+          height: 70%;
+
+          & > .pupil-rotate {
+            width: 100%;
+            height: 100%;
+            &:hover {
+              .pupil {
+                width: 80%;
+                height: 80%;
+              }
+            }
+            & > .pupil {
+            }
+          }
+        }
+      }
+    }
+    & > .lashes {
+      & > .lashes-container {
+        & > .eye-lash:nth-child(2) {
+          top: 13%;
+        }
+        & > .eye-lash {
+          top: 10%;
+          & > div {
+            height: 17%;
+          }
+        }
+      }
+    }
   }
 }

@@ -19,42 +19,38 @@
 .default_page {
   // background: rgb(92, 54, 54);
   background-size: 400% 400%;
-  background: linear-gradient(
-    186deg,
-    // rgb(247, 3, 3) 0%,
-    rgb(212, 96, 143) 8%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  // background: linear-gradient(
+  //   186deg,
+  //   // rgb(247, 3, 3) 0%,
+  //   theme("colors.primary") 8%,
+  //   theme("colors.secondary") 100%
+  // );
+  background-color: theme('colors.primary');
   animation: gradient 15s ease infinite;
-  height: 100vh;
-  padding: 0 10vw;
-  & > .header {
-    left: 0;
-    position: fixed;
-    width: 100%;
+
+  & >  .header {
     --eye-box-side: calc(10vh + 20px);
     min-height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    & > div {
+      transition-duration: 200ms;
+      transition-timing-function: ease-in-out;
+      transition-property:background-color,backdrop-filter ;
+    }
     & > #eye-container {
       width: var(--eye-box-side);
       height: var(--eye-box-side);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      align-content: center;
-      justify-items: center;
+  
       // padding:1vh;
     }
   }
 }
 
-.dark {
-  .dark\:default_page {
-    background: theme("colors.primary");
-  }
-}
+// body[data-theme="dark"] {
+//   .default_page {
+//     background: black
+    
+//   }
+// }
 
 @keyframes gradient {
   0% {
