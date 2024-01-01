@@ -7,7 +7,7 @@ import {
 } from "react-transition-group";
 import { fadeIn, scaleOut, transRight, transLeft, TIMEOUT } from "./animations";
 
-var trans:any = transLeft;
+var trans: any = transLeft;
 
 // const getTransKey = (router, transKey) => {
 //   console.log(transKey);
@@ -30,10 +30,10 @@ const Transition = ({ children }: PropsWithChildren) => {
   //   last = router.pathname;
   // }, [router.pathname]);
   useEffect(() => {
-    if(router.pathname.match('/skills')){
-      trans=fadeIn
+    if (router.pathname.match("/skills")) {
+      trans = fadeIn;
     } else {
-      trans=fadeIn
+      trans = fadeIn;
     }
   }, [router.pathname]);
 
@@ -47,9 +47,13 @@ const Transition = ({ children }: PropsWithChildren) => {
         }}
       >
         {(status) => (
-          
           //@ts-ignore
-          <div style={{ ...trans[status] }} className={"centerize wh-max "+(status!='entering'?'trans':"")}>
+          <div
+            style={{ ...trans[status] }}
+            className={
+              "centerize wh-max " + (status != "entering" ? "trans" : "")
+            }
+          >
             {children}
           </div>
         )}

@@ -131,10 +131,18 @@
 }
 
 * {
-  cursor: none;
+  cursor: url('pointer.svg') 16 16, auto;
+  
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+button:hover,a:hover{
+  cursor: url('pointer.svg') 16 16, auto;
+
+}
+.cursor-pointer:hover {
+
 }
 
 /* body {
@@ -212,6 +220,64 @@ a {
 }
 
 .cursor-ring {
-  
+  .star {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    position: relative;
+}
+
+.star::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: -50px;
+    border-bottom: 80px solid yellow; /* Adjust the size and color of the star as needed */
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    transform: rotate(35deg);
+}
+
+.star::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: -50px;
+    border-top: 80px solid yellow; /* Adjust the size and color of the star as needed */
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    transform: rotate(-35deg);
+}
+
   border-color: var(--cursor-color);
 }
+
+
+
+.star {
+ @apply absolute w-fit shadow-2xl  shadow-white animate-pulse transition-all duration-1000 ;
+transition-duration: 2000ms;
+
+}
+
+.start:hover {
+  @apply bg-red-500;
+  transform: scale(3);
+}
+
+.smooth-1 {
+  transition-timing-function: cubic-bezier(.39,.5,0,.3.03);
+
+}
+
+.smooth-2 {
+  transition-timing-function: cubic-bezier(.39,.5,.18,1.02);
+
+}
+
+.smooth-3 {
+  transition-timing-function: cubic-bezier(.55,.65,.22,.91);
+
+}
+

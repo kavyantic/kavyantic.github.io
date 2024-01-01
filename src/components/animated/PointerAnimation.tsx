@@ -21,7 +21,7 @@ const PointerAnimation = (props: PropsWithChildren) => {
       // from: { scaleTranslate: [0.2, lastXY] },
       to: { sxy: [1, 0, 0] },
     });
-  }, [lastXY]);
+  }, [lastXY,startAnim]);
 
   return (
     <>

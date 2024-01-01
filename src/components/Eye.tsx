@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { JsxElement } from "typescript";
+import { Router, useRouter } from "next/router";
 
 var eyeMidX: number;
 var eyeMidY: number;
@@ -23,6 +24,8 @@ export default function Eye() {
     ang: 0,
     config: { mass: 0.3, friction: 10, easing: 2 },
   }));
+  const router = useRouter();
+  const [stopMouseEvent, setStopMouseEvent] = useState(false);
 
   const [eyeReactionSpring, startEyeReactionSpring] = useSpring<{
     size: number;
@@ -66,7 +69,7 @@ export default function Eye() {
       const distance = Math.hypot(dx, dy);
 
       eyeReactionHandler(distance < 200);
-      //************  vanilla pupil rotating feature **************//
+      //************  vanilla pupil rotating feasetPageLoadingture **************//
       // if (eyeConRef.current)
       //   eyeConRef.current.style.transform = rotateEle(ang - 90);
     },
@@ -77,22 +80,52 @@ export default function Eye() {
     const listener = (e: UIEvent) => {
       [eyeMidX, eyeMidY] = middleOfEle(eyeConRef.current as HTMLDivElement);
     };
+    var tm;
+    // function startEyeLoadingAnim() {
+    //   startEyeSpring.start({
+    //     to: { ang: 1 },
+    //   });
+    //   startEyeSpring.start({
+    //     to: { ang: 180 },
+    //     onResolve() {
+    //       setTimeout(startEyeLoadingAnim, 300);
+    //       startEyeLoadingAnim();
+    //     },
+    //   });
+    // }
+    const routerChangeStartHandler = () => {
+      setStopMouseEvent(true);
+      // startEyeLoadingAnim();
+    };
+    const routerChangeEndHandler = () => {
+      setStopMouseEvent(false);
+      // startEyeSpring.start({
+      //   cancel: true,
+      // });
+    };
+    Router.events.on("routeChangeStart", routerChangeStartHandler);
+    Router.events.on("routeChangeComplete", routerChangeEndHandler);
     if (eyeConRef.current) {
       [eyeMidX, eyeMidY] = middleOfEle(eyeConRef.current);
 
       window.addEventListener("resize", listener);
     }
-    return () => window.removeEventListener("resize", listener);
+    return () => {
+      Router.events.off("routeChangeStart", routerChangeStartHandler);
+      Router.events.off("routeChangeComplete", routerChangeEndHandler);
+      window.removeEventListener("resize", listener);
+    };
   }, []);
   useEffect(() => {
-    if (mouseListener) {
+    if (mouseListener && !stopMouseEvent) {
       mouseListener.addEventListener("mousemove", eyeMoveHandler);
     }
     return () => {
       if (mouseListener)
         mouseListener.removeEventListener("mousemove", eyeMoveHandler);
     };
-  }, [eyeMoveHandler]);
+  }, [eyeMoveHandler, stopMouseEvent]);
+
   const [size, eyeLashScale] = useMemo(
     () => [
       eyeReactionSpring.size.to((s) => s + "%"),
@@ -144,7 +177,13 @@ export default function Eye() {
   );
 }
 
-export const ShowcaseEye = function ({ angle,react }: { angle: number ,react:boolean}) {
+export const ShowcaseEye = function ({
+  angle,
+  react,
+}: {
+  angle: number;
+  react: boolean;
+}) {
   const eyeConRef = useRef<HTMLDivElement>(null);
   const [eyeMid, setEyeMid] = useState({ x: 0, y: 0 });
   const [eyeSpring, startEyeSpring] = useSpring(() => ({
@@ -165,10 +204,9 @@ export const ShowcaseEye = function ({ angle,react }: { angle: number ,react:boo
       to: { ang: angle },
     });
   }, [angle]);
-  useEffect(()=>{
-      eyeReactionHandler(react)
-    
-  },[react])
+  useEffect(() => {
+    eyeReactionHandler(react);
+  }, [react]);
 
   const eyeReactionHandler = useCallback<(t: boolean) => void>((d) => {
     if (d) {

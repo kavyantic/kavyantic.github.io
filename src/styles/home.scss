@@ -69,9 +69,10 @@
 }
 
 .profile-picture {
+  --size-profile-img:calc(150px + 13vw);
   border-radius: 50% 0% 50% 50%;
-  height:45vh;
-  width:45vh; 
+  height:var(--size-profile-img);
+  width:var(--size-profile-img); 
 }
 
 

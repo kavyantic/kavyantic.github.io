@@ -44,7 +44,7 @@ export default function Cursor({
         ele.removeEventListener("mousemove", listenMouseEvent);
       }
     };
-  }, []);
+  }, [listenMouseEvent, listener]);
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function Cursor({
           transform: movementSprings[1].xy.to(trans),
         }}
       />
-      <animated.div
+      {/* <animated.div
         className={
           "cursor flex items-center justify-center pointer-events-none z-50"
         }
@@ -77,7 +77,7 @@ export default function Cursor({
           // I might have map these values to l,r,b,t manually by setting 'none' when falsy value other then 0
           transform: movementSprings[0].xy.to(trans),
         }}
-      />
+      /> */}
       {/* {movementSprings
         .filter((_, i) => i > 1)
         .map((e,i) => (

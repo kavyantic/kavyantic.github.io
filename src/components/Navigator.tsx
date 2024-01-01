@@ -27,7 +27,7 @@ const initialClick = true;
 const initClickEyeThinkMsg = "?";
 const trans = (x: number, y: number) =>
   `translate3d(${x}px,${y}px,0) ` + `translate3d(-${x && 50}%,-${y && 50}%,0)`;
-
+var inactiveTm: any;
 const navMovConf = { mass: 1, tension: 150, friction: 10 };
 export default function NavigatorMenu({
   listener,
@@ -44,6 +44,7 @@ export default function NavigatorMenu({
   const [open, toggle] = useState(false);
   const [moving, setMoving] = useState<boolean>(false);
   const [navMenuVis, setNavMenuVis] = useState<boolean>(false);
+  const [inactive, setInactive] = useState(false);
   const isBlur = useSelector<RootState, boolean>((s) => s.ui.navigator.blur);
   const springs = useSpring({
     width: open ? 360 : 70,
@@ -171,22 +172,24 @@ export default function NavigatorMenu({
   useEffect(() => {
     if (navRef.current) {
       navRef.current.onclick = () => {
-        toggle((_) => !_ );
+        toggle((_) => !_);
         setNavMenuVis(false);
       };
     }
+    // ba
   }, [toggle]);
 
   var cls = isBlur || moving ? " bg-secondary/30 " : " bg-secondary ";
-  cls+=(moving?" scale-110 ":"")
-  var attention = open ? " attentio " : "";
+  cls += moving ? " scale-110 " : "";
+  var attention = inactive ? " galatine " : "";
+
   return (
     <animated.div
       id="navigator"
       ref={navRef}
       // onTouchStart={navMouseDownEventListener}
       onMouseDown={navMouseDownEventListener}
-      className={"navigator"}
+      className={"navigator "}
       style={{
         height: 70,
         ...springs,
@@ -225,7 +228,7 @@ export default function NavigatorMenu({
             style={{ width: "30px" }}
             className={"transition-all hover:rotate-90 "}
           >
-            <Cog6ToothIcon className="text-primary "  />
+            <Cog6ToothIcon className="text-primary " />
           </div>
         </animated.div>
         <div

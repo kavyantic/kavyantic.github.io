@@ -9,21 +9,21 @@ import { Router, useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { useReducer } from "react";
 
-// interface Element {
-//   value: string;
-//   speed: number;
-//   left: number;
-//   trail: number;
-// }
-// //Create a funciton to add two number
+interface Element {
+  value: string;
+  speed: number;
+  left: number;
+  trail: number;
+}
+//Create a funciton to add two number
 
-// interface State {
-//   data: (Element | null)[];
-// }
+interface State {
+  data: (Element | null)[];
+}
 
-// type Action =
-//   | { type: "ADD"; payload: Element }
-//   | { type: "REMOVE"; payload: number };
+type Action =
+  | { type: "ADD"; payload: Element }
+  | { type: "REMOVE"; payload: number };
 
 // var utfStart = 10016;
 // function reducer(state: State, action: Action): State {
@@ -38,12 +38,12 @@ import { useReducer } from "react";
 //       return state;
 
 //     case "REMOVE":
-//       // return {
-//       //   ...state,
-//       //   data: state.data.filter((_, index) => index !== action.payload),
-//       // };
-//       state.data.splice(action.payload, 1);
-//       return state;
+//       return {
+//         ...state,
+//         data: state.data.filter((_, index) => index !== action.payload),
+//       };
+//     // state.data.splice(action.payload, 1);
+//     // return state;
 //     default:
 //       //@ts-ignore
 //       throw new Error(`Unhandled action type: ${action.type}`);
@@ -55,16 +55,14 @@ import { useReducer } from "react";
 //   defaults: { left: number; top: number };
 // }): JSX.Element {
 //   const [elements, dispatchElements] = useReducer(reducer, {
-//     data: [
-//       // { value: "✥", speed: 10, left: 100 }
-//     ],
+//     data: [{ value: "✥", speed: 10, left: 100, trail: 1 }],
 //   });
 //   const router = useRouter();
 
 //   const [translateTrails, transTrailApi] = useTrail(3, (i) => {
 //     return {
 //       xy: [0, 0],
-//       config: { friction: 50 },
+//       config: { friction: 30 },
 //     };
 //   });
 //   const [blur, setBlur] = useState(false);
@@ -110,8 +108,8 @@ import { useReducer } from "react";
 //     <>
 //       <div
 //         className={
-//           "w-screen h-screen  fixed top-0 left-0 transition-all duration-500 " +
-//           (blur ? " self-blur-200   " : " ")
+//           "w-screen h-screen  fixed top-0 left-0 transition-all duration-500 self-blur-200 "
+//           // (blur ? "   " : " ")
 //         }
 //       >
 //         {elements.data.map((e, i) => {
@@ -155,13 +153,17 @@ import { useReducer } from "react";
 //     config: { tension: 1 + props.speed, friction: 10 },
 //     // reverse:true
 //   });
-//   useEffect(() => {
-//     var tm = setTimeout(props.remove, 5000);
-//     return () => clearTimeout(tm);
-//   }, [props.remove]);
+//   // useEffect(() => {
+//   //   var tm = setTimeout(()=>props.remove(), 3000);
+//   //   return () => clearTimeout(tm);
+//   // }, [props.remove]);
 //   return (
 //     <>
 //       <animated.div
+//         onClick={() => {
+//           console.log("clicked ");
+//           props.remove();
+//         }}
 //         className="absolute text-4xl"
 //         style={{ ...spring, transform: props.translate }}
 //       >
@@ -171,19 +173,26 @@ import { useReducer } from "react";
 //   );
 // };
 
-//Create a funciton to add two number
+// // // // //Create a funciton to add two number
 
+var last = 0;
+var scrollFreqTrigger = 100;
 export function BgBoxex(props: {
   defaults: { left: number; top: number };
 }): JSX.Element {
   const [boxTrails, boxTrailsApi] = useTrail(6, (i, b) => {
     var power = i * 4;
+    var stl = power*10
+    var stlSize = stl*2
     return {
-      left: props.defaults.left,
-      top: props.defaults.top,
-      width: 40,
-      height: 40,
-      config: { mass: 10 + power, friction: 50 + power, tension: 400 },
+      left: props.defaults.left-stl,
+      top: props.defaults.top-stl,
+      width: 40+stlSize,
+      height: 40+stlSize,
+      delay:0,
+
+      // immediate:true,
+      config: { mass: 10 + power, friction: 50 + power, tension: 150 },
     };
   });
   const range = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -217,8 +226,7 @@ export function BgBoxex(props: {
       clearTimeout(tm);
       var randX = Math.random() * 500 - Math.random() * 500;
       var randY = Math.random() * 500 - Math.random() * 500;
-
-      tm = setTimeout(() => {
+      function fn() {
         boxTrailsApi.start((v, controller) => {
           const current = controller.get();
 
@@ -236,19 +244,46 @@ export function BgBoxex(props: {
 
           return { left: moveX, top: moveY };
         });
-      }, rand);
+      }
+      fn();
+
+      tm = setTimeout(fn, rand);
     }, 2000);
     return () => {
       clearInterval(int);
     };
   }, [boxTrailsApi]);
+
+  // useEffect(() => {
+  //   function fn() {
+  //     scrollFreqTrigger--;
+  //     if (!scrollFreqTrigger) {
+  //       scrollFreqTrigger = 100;
+  //       console.log("called scroll animation");
+  //       boxTrailsApi.start((v, controller) => {
+  //         return {
+  //           reset:true
+  //         }
+  //         // const current = controller.get();
+
+  //         // // var moveX = current.left
+  //         // var moveY = current.top - 100;
+  //         // moveY = moveY < 0 ? 0 : moveY;
+
+  //         // return { to: { top: 0 },  };
+  //       });
+  //     }
+  //   }
+  //   window.addEventListener("scroll", fn);
+  //   return () => window.removeEventListener("scroll", fn);
+  // }, [boxTrailsApi]);
   return (
     <>
-      <div className="w-screen h-screen  fixed top-0 left-0 self-blur-100 ">
+      <div className="w-screen h-screen  fixed top-0 left-0 self-blur-500 ">
         {boxTrails.map((props, key) => (
           <animated.div
             key={key}
-            className="border-2 border-accent rounded-md fixed self-blur "
+            className="border-2 border-accent rounded-full fixed  "
             style={props}
           ></animated.div>
         ))}

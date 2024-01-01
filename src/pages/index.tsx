@@ -38,7 +38,7 @@ export default function Home({ phone, email }: PageProps): JSX.Element {
   });
 
   useEffect(() => {
-    var base = ` I have been programming since the age of 16. While I am proficient in a wide range of webdevelopment technologies, Python is undoubtedly my favorite language.`;
+    var base = ` I have been programming since the age of 15. While I am proficient in a wide range of webdevelopment technologies, Python is undoubtedly my favorite language.`;
     var base2 = `People often make incorrect assumptions about my gender based on my name. However, they quickly realize that I am male once we engage in conversation`;
     var i = 0;
     var speed = 30;
@@ -82,20 +82,20 @@ export default function Home({ phone, email }: PageProps): JSX.Element {
             <div>
               <animated.div style={springs[0]}>
                 <h1 className="text-4xl p-1 sm:text-5xl md:text-6xl  text-primary acorn">
-                  {"  Hi. I&lsquo;m Kávya ✦  "}
+                  Hi. I&#39;m Kávya ✦
                 </h1>
               </animated.div>
               <animated.div className={"acorn"} style={springs[1]}>
                 <h1 className="text-1xl sm:text-2xl md:text-3xl p-2   text-blue-300 ">
                   <span>A </span> Designer{" & "}
                   <span
-                    className="text-blue-400 inline-block cursor-pointer "
+                    className="text-blue-400 inline-block cursor-pointer animate-pulse"
                     onClick={(e) => {
                       setReverseAnim(true);
                       dispatch(
                         uiActions.setLastPointer({ x: e.clientX, y: e.clientY })
                       );
-                      router.push("/skills");
+                      router.push("/work");
                     }}
                   >
                     {"<Developer>"}

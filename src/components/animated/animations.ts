@@ -6,6 +6,8 @@ export const fadeIn = {
     position: `absolute`,
     opacity: 0,
     transform: `scale(.8)`,
+    
+    
 
     // transition: `opacity ${TIMEOUT}ms ease-in-out, transform ${TIMEOUT}ms ease-in-out`,
     // transitionDelay:'.2s'

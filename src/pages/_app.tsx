@@ -22,18 +22,14 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
   const mouseListenerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      id={mouseListenerId}
-      ref={mouseListenerRef}
-      style={{ backgroundColor:'red' }}
-    >
+    <div id={mouseListenerId} ref={mouseListenerRef}>
       <Provider store={store}>
         {/* <LayoutTransition> */}
-          {getLayout(
-            <AnimatedPages>
-              <Component {...pageProps} />
-            </AnimatedPages>
-          )}
+        {getLayout(
+          <AnimatedPages>
+            <Component {...pageProps} />
+          </AnimatedPages>
+        )}
         {/* </LayoutTransition> */}
         <Cursor listener={mouseListenerRef} />
       </Provider>

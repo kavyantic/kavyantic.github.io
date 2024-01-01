@@ -14,6 +14,8 @@ const getNearestNavStack: (options: { left: number; top: number }) => {
 } = (opt) => {
   const body = document.querySelector("body");
 
+
+  
   if (body) {
     const rects = body.getBoundingClientRect();
     const midX = rects.width / 2;
@@ -33,3 +35,4 @@ const getNearestNavStack: (options: { left: number; top: number }) => {
 };
 
 export default getNearestNavStack;
+

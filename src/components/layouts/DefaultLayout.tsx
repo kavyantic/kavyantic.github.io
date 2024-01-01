@@ -8,6 +8,8 @@ import { mouseListenerId } from "@/constants";
 import { uiActions } from "@/app/store/uiSlice";
 import { BgBoxex } from "../BgBoxex";
 import Drawer from "../Drawer";
+import { updateTheme } from "@/app/utils/theme";
+import StarsBg from "../parallax/StarsBackground";
 var drawerTm: any;
 var mids =
   typeof window == "object"
@@ -28,7 +30,6 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
   );
 
   const [eyePropmt, setEyePrompt] = useState("");
-  const [drawerVis, setDrawerVis] = useState(false);
   const dispatch = useDispatch();
   const spring = useSpring({
     size: eyeReactions.think ? 1 : 0,
@@ -69,13 +70,25 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
   }, [eyePropmt, setEyePrompt, eyeReactions.think]);
 
   return (
-    <div className="default_page text-primary flex relative overflow-hidden">
+    <div
+      className="default_page text-primary flex relative overflow-hidden "
+      onMouseDown={updateTheme}
+    >
+      <div className="absolute right-10 top-10 text-green-500">
+      <p>Thanks for visiting!</p>
+
+          <p>Under construction</p>
+          <p>Last update : 28 Dec 2023</p>
+          <p>Upcoming : Showcase slider on work page;</p>
+
+
+      </div>
       <div />
       <div
         // onClick={() => dispatch(uiActions.drawer({ open: false }))}
         className={
-          "transition-all duration-300 bg-primary/90 border-r-4 border-gray-800 overflow-hidden z-50 " +
-          (drawerUi.open ? "lg:w-1/12 w-1/6 " : " w-0")
+          "transition-all duration-300 bg-primary/90 border-r-4 border-gray-800 overflow-hidden  " +
+          (drawerUi.open ? "lg:w-3/12 w-1/6 " : " w-0")
         }
         onMouseEnter={() => clearTimeout(drawerTm)}
         onMouseLeave={() => closeInactiveDrawer()}
@@ -87,14 +100,15 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
           Kavy
         </h3>
       </section> */}
-      <BgBoxex defaults={mids} />
+      {/* <BgBoxex defaults={mids} /> */}
+      {/* <BgBoxex defaults={{left:0,top:0}}/> */}
 
-      <div className={"header centerize z-40 w-full left-0 fixed"}>
+      <div className={"header centerize w-full  left-0 fixed"}>
         <animated.div
           id="eye-container"
           style={scaleTrails[0]}
           className={
-            "rounded-full  w-full m-2  " +
+            "relative rounded-full   ww-full-full m-2 hover:bg-blur hover:bg-secondary/20  " +
             (eyeReactions.blur ? " bg-blur bg-secondary/10 " : "")
           }
         >
@@ -103,18 +117,15 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
             className="absolute right-1 text-4xl"
             style={{ transform: spring.size.to((s) => `scale(${s})`) }}
           >
-            {eyePropmt}
+            {"Under construction"}
           </animated.div>
         </animated.div>
       </div>
       <main
         onClick={() => dispatch(uiActions.drawer({ open: false }))}
-        className={
-          "transition-all duration-300  bg-primary " +
-          (drawerUi.open ? " self-blur-100 " : " w-screen")
-        }
+        className={"transition-all duration-300  bg-primary w-screen "}
       >
-        {children}
+        <StarsBg>{children}</StarsBg>
       </main>
       <NavigatorMenu listener={mouseListenerRef} />
 

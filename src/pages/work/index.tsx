@@ -66,9 +66,9 @@ export default function Work(Props: PageProps) {
       <div className="  py-2 w-full lg:px-32 md:px-10 ">
         <div className="w-full  h-screen  flex">
           <div className="m-auto acorn">
-            <h1 className="text-8xl text-center ">{"Hi, I'm Kávya"}</h1>
-            <h1 className="text-6xl text-center text-blue-400">
-              My development JournⒺy{" "}
+            <h1 className="text-8xl  text-center ">{"Hi, I'm Kávya"}</h1>
+            <h1 className="md:text-6xl text-3xl text-center text-blue-400">
+              My recent stuff{" "}
             </h1>
           </div>
         </div>
@@ -160,7 +160,7 @@ const Pythonic = memo(function Ele() {
           <Title className="text-4xl ">Fun</Title>
           <Title className="text-xl text-white">Explore</Title>
         </div>
-        <div className="w-full h-full my-5 rounded-md bg-slate-800 dracula:bg-teal-500 hover:scale-105 transition-transform duration-500 cursor-pointer"></div>
+        <div className="w-full h-full my-5 rounded-md bg-slate-800 dracula:bg-teal-500 hover:scale-95 transition-transform duration-500 cursor-pointer"></div>
         <div className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"
